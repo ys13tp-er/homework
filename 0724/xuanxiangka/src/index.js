@@ -1,5 +1,7 @@
 // 以模块的方式引入vue
 const Vue = require('./vue');
+require('./css/index.css');
+
 const vm = new Vue({
     // V
     el: '#demo',

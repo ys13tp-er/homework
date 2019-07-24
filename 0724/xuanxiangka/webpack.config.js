@@ -27,7 +27,7 @@ module.exports = {
                 test: /\.html|htm$/,
                 // 用两个加载器style-loader和css-loader
                 use: ['html-loader']
-            }
+            },
             // {
             //     test: /\.js$/,
             //     // 除了node_modules和bower_components之外
@@ -39,12 +39,12 @@ module.exports = {
             //         }
             //     }
             // }
-            // {
-            //     // 匹配后缀为css的文件
-            //     test: /\.lin$/,
-            //     // 用两个加载器style-loader和css-loader
-            //     use: ['eno-loader']
-            // }
+            {
+                // 匹配后缀为css的文件
+                test: /\.lin$/,
+                // 用两个加载器style-loader和css-loader
+                use: ['eno-loader']
+            }
         ]
     },
     // 插件
