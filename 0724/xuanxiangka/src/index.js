@@ -21,11 +21,12 @@ const vm = new Vue({
     `,
     methods: {
         bianb(index) {
-            for (var i = 0; i < vm.ddisok.length; i++) {
-                vm.ddisok[i] = false;
-            }
+            // for (var i = 0; i < vm.ddisok.length; i++) {
+            //     vm.ddisok[i] = false;
+            // }
+            vm.ddisok = [false, false, false];
             vm.ddisok[index] = true;
-            vm.$forceUpdate();
+            // vm.$forceUpdate();
         }
     }
 })
