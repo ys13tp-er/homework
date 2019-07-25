@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #pipei {
+            width: 700px;
+            border: 1px solid #000;
+        }
+
+        input {
+            margin: 10px 20px;
+        }
+
+        p {
+            text-indent: 2em;
+        }
+
+        .high-light {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="pipei">
+        <input type="text" id="tex" v-model.trim="val">
+        <p v-html="content"></p>
+    </div>
+</body>
+
+<script src="../vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#pipei',
+        data: {
+            val: '',
+            content: '午间，渔塘科技回应称，渔塘公司一直有正常的午休时间，从12点到13:30是公司员工用餐和自由活动的时间，公司对此从未干涉过。午间，渔塘科技回应称，渔塘公司一直有正常的午休时间，从12点到13:30是公司员工用餐和自由活动的时间，公司对此从未干涉过。午间，渔塘科技回应称，渔塘公司一直有正常的午休时间，从12点到13:30是公司员工用餐和自由活动的时间，公司对此从未干涉过。',
+            content2: '午间，渔塘科技回应称，渔塘公司一直有正常的午休时间，从12点到13:30是公司员工用餐和自由活动的时间，公司对此从未干涉过。午间，渔塘科技回应称，渔塘公司一直有正常的午休时间，从12点到13:30是公司员工用餐和自由活动的时间，公司对此从未干涉过。午间，渔塘科技回应称，渔塘公司一直有正常的午休时间，从12点到13:30是公司员工用餐和自由活动的时间，公司对此从未干涉过。'
+        },
+        // computed: {
+        //     // 你要计算的结果
+        //     hightContent() {
+        //         let hightContent = '<span class="high-light">' + this.val + '</span>';
+        //         return hightContent
+        //     }
+        // },
+        watch: {
+            val() {
+                // 每次val改变，该函数就会触发
+                if (this.val) {
+                    // 重置内容
+                    this.content = this.content2;
+                    // 以输入内容为正则，全局匹配
+                    let reg = new RegExp(this.val, 'g');
+                    // 要替换的高亮内容
+                    let hightContent = '<span class="high-light">' + this.val + '</span>';
+                    // 替换成高亮
+                    this.content = this.content.replace(reg, hightContent);
+                } else {
+                    // 搜索框为空时，重置
+                    this.content = this.content2;
+                }
+            }
+        }
+    })
+</script>
+
+</html>
