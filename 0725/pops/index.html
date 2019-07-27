@@ -1,0 +1,114 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #ws {
+        width: 600px;
+        background: #ccc;
+        margin: 0 auto;
+    }
+
+    header {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        color: white;
+        background-color: red;
+    }
+
+    footer {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        color: white;
+        background-color: blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div id="ws">
+    <div id="demo"></div>
+</div>
+<script src="../vue.js"></script>
+<script>
+    var vm = new Vue();
+    // 全局注册
+    Vue.component('my-footer', {
+        // 每个组件在经过使用的时候都返回一个全新的data数据模型
+        // M
+        data() {
+            return {
+                spanif: false,
+                title: '搜索商品、店铺'
+            }
+        },
+        // V
+        template: `
+            <footer>
+                <span v-if="spanif">请选择</span>
+                <input v-model="title" />
+            </footer>
+        `,
+        // 组件被挂载的时候触发
+        mounted() {
+            // 监听外部的事件触发
+            vm.$on('toHeader', (data) => {
+                console.log(data)
+                this.spanif = data.spanif;
+                this.title = data.title;
+            })
+        }
+    })
+    Vue.component('my-header', {
+        template: `
+            <header @click="send">
+              {{this.title}}
+            </header>
+        `,
+        data() {
+            return {
+                zhuan: true,
+                title: '未能获取地址'
+            }
+        },
+        methods: {
+            send() {
+                // 传递的事件名 传递的数据
+                // 触发一个事件为toHeader，并且传输this.name数据
+                if (this.zhuan) {
+                    this.zhuan = false;
+                    this.title = '请选择地址';
+                    vm.$emit('toHeader', {
+                        spanif: true,
+                        title: '搜索地址'
+                    })
+                } else {
+                    this.zhuan = true;
+                    this.title = '未能获取地址';
+                    vm.$emit('toHeader', {
+                        spanif: false,
+                        title: '搜索商品、店铺'
+                    })
+                }
+
+            }
+        }
+    })
+
+    // 根容器
+    new Vue({
+        el: "#demo",
+        template: `
+            <div>
+                <my-header></my-header>
+                <my-footer></my-footer>
+            </div>
+        `
+    })
+</script>
